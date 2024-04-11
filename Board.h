@@ -5,21 +5,14 @@
 
 #include <vector>
 
-enum Player { NONE = 0, PLAYER_X = 1, PLAYER_O = 2 };
-
 class Board {
 public:
     Board();
-    void printBoard() const;
-    bool makeMove(int row, int col, int turn);
-    Player checkWinner() const;
-    bool isBoardFull() const;
+
+    void draw();
 
 private:
-    std::vector<std::vector<Player>> board;
-    static const int BOARD_SIZE = 3;
-
-    bool isValidMove(int row, int col) const;
+    std::vector<int> boardState; // 0 for empty, 1 for X, 2 for O
 };
 
 #endif // BOARD_H

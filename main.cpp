@@ -1,13 +1,10 @@
 // tic-tac-toe.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include "mainwindow.h"
-#include <QApplication>
+#include "MainWindow.h"
 
-int main(int argc, char* argv[])
-{
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec();
+int main() {
+    MainWindow mainWindow(800, 600, "Tic Tac Toe");
+    mainWindow.run();
+    return 0;
 }

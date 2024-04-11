@@ -3,33 +3,25 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include <QGridLayout>
-#include <QLabel>
-#include <QPixmap>
-#include <QPushButton>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <string>
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
-
+class MainWindow {
 public:
-    MainWindow(QWidget* parent = nullptr);
+    MainWindow(int width, int height, const std::string& title);
     ~MainWindow();
 
-private slots:
-    void handleButtonClick();
+    void run();
 
 private:
-    QGridLayout* gridLayout;
-    QLabel* labels[3][3];
-    QPushButton* buttons[3][3];
-    char currentPlayer;
-    bool gameOver;
+    GLFWwindow* window;
+    int screenWidth, screenHeight;
+    std::string title;
 
-    void checkWin(int row, int col);
-    void declareWinner(const QString& winner);
-    void switchPlayer();
+    void initOpenGL();
+    void setupTextures();
+    void render();
 };
 
 #endif // MAINWINDOW_H
