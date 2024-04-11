@@ -1,6 +1,6 @@
 #pragma once
 
-ifndef BOARD_H
+#ifndef BOARD_H
 #define BOARD_H
 
 #include <vector>
@@ -22,3 +22,4 @@ private:
     bool isValidMove(int row, int col) const;
 };
 
+#endif // BOARD_H
