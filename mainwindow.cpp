@@ -2,7 +2,7 @@
 #include "Board.h"
 
 MainWindow::MainWindow(int width, int height, const std::string& title)
-    : screenWidth(width), screenHeight(height), title(title) {
+    : screenWidth(width), screenHeight(height), title(title), boardTexture(0) {
     if (!glfwInit()) {
         // Handle error
         return;
@@ -49,11 +49,30 @@ void MainWindow::initOpenGL() {
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
-void MainWindow::setupTextures() {
-    // Load textures here
+GLuint MainWindow::loadTexture(const char* filename) {
+    GLuint textureID = SOIL_load_OGL_texture(filename, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+    if (textureID == 0) {
+        // Handle error
+    }
+    return textureID;
 }
 
 void MainWindow::render() {
     glClear(GL_COLOR_BUFFER_BIT);
-    // Render game board and other elements
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Draw game board
+    drawTexture(boardTexture, 0, 0, screenWidth, screenHeight);
+
+    // Render other elements
+}
+
+void MainWindow::drawTexture(GLuint texture, float x, float y, float width, float height) {
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0); glVertex2f(x, y);
+    glTexCoord2f(1, 0); glVertex2f(x + width, y);
+    glTexCoord2f(1, 1); glVertex2f(x + width, y + height);
+    glTexCoord2f(0, 1); glVertex2f(x, y + height);
+    glEnd();
 }
